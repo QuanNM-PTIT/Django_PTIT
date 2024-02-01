@@ -3,6 +3,7 @@ from djongo import models
 
 # Create your models here.
 class Book(models.Model):
+    cover = models.ImageField(upload_to='covers/', default='covers/default.png')
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
