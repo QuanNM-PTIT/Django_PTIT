@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,18 @@ SECRET_KEY = 'django-insecure-fe*nts4b2p+j_bs4k*#mt0#c=*-*_a(jey1nyy=9+za%n+53a0
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+# File .env
+load_dotenv(os.path.join(BASE_DIR, 'env/.env'))
+
+MONGODB_URI = os.getenv('MONGODB_URI')
+MYSQL_DATABASE_NAME = os.getenv('MYSQL_DATABASE_NAME')
+MYSQL_DATABASE_USERNAME = os.getenv('MYSQL_DATABASE_USERNAME')
+MYSQL_DATABASE_PASSWORD = os.getenv('MYSQL_DATABASE_PASSWORD')
+MYSQL_HOST = os.getenv('MYSQL_HOST')
+MYSQL_PORT = os.getenv('MYSQL_PORT')
+MONGODB_DATABASE_NAME = os.getenv('MONGODB_DATABASE_NAME')
 
 
 # Application definition
@@ -77,10 +91,25 @@ WSGI_APPLICATION = 'FinalStoreProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE':  'django.db.backends.mysql',
+        'NAME': MYSQL_DATABASE_NAME,
+        'USER': MYSQL_DATABASE_USERNAME,
+        'PASSWORD': MYSQL_DATABASE_PASSWORD,
+        'HOST': MYSQL_HOST,
+        'PORT': MYSQL_PORT,
+    },
+    'mongodb': {
+        'ENGINE': 'djongo',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': MONGODB_URI,
+            'name': MONGODB_DATABASE_NAME,
+            'authMechanism': 'SCRAM-SHA-1',
+        }
     }
 }
+
+DATABASE_ROUTERS = ['store.database_router.StoreDatabaseRouter']
 
 
 # Password validation
