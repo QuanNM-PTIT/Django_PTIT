@@ -13,6 +13,9 @@ class CartItem(models.Model):
         db_table = 'CartItems'
         ordering = ['created_at']
 
+    def __str__(self):
+        return self.cart_id
+
 
 class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True)
@@ -22,3 +25,7 @@ class Cart(models.Model):
     class Meta:
         db_table = 'Carts'
         ordering = ['created_at']
+
+
+    def __str__(self):
+        return self.cart_id
