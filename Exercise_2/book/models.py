@@ -13,3 +13,6 @@ class Book(models.Model):
     class Meta:
         db_table = 'Books'
         ordering = ['created_at']
+
+    def __str__(self):
+        return self.title
