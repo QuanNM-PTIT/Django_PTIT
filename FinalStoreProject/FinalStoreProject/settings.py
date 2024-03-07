@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "store.apps.StoreConfig"
+    "category.apps.CategoryConfig"
 ]
 
 MIDDLEWARE = [
@@ -109,7 +109,7 @@ DATABASES = {
     }
 }
 
-DATABASE_ROUTERS = ['store.database_router.StoreDatabaseRouter']
+DATABASE_ROUTERS = ['category.database_router.CategoryDatabaseRouter']
 
 
 # Password validation
@@ -148,11 +148,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = '/media/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'FinalStoreProject/static'
+]
 
-MEDIA_ROOT = BASE_DIR / 'static/media'
+# MEDIA_URL = '/media/'
+#
+# MEDIA_ROOT = BASE_DIR / 'static/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
